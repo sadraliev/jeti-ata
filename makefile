@@ -5,3 +5,5 @@ test:
 	npm run test
 lint:
 	npm run lint
+watch:
+	npm run test:watch

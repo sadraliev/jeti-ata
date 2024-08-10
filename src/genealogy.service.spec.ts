@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GenealogyService } from './genealogy.service';
-import { makeFullName, Person } from './lib';
-import { faker } from '@faker-js/faker';
+import { makeFullName, makeIndividual } from './lib';
 
 describe('GenealogyService', () => {
   let genealogyService: GenealogyService;
@@ -19,16 +18,9 @@ describe('GenealogyService', () => {
   });
 
   it('it should add a person', () => {
-    const sex = faker.person.sexType();
-    const person: Omit<Person, 'id' | 'fullName'> = {
-      firstName: faker.person.firstName(sex),
-      lastName: faker.person.lastName(sex),
-      gender: sex,
-      birthDate: new Date('1960-01-01').toISOString(),
-    };
-
-    const newPerson = genealogyService.createPerson(person);
-    const result = genealogyService.getPersonById(newPerson.id);
+    const person = makeIndividual();
+    const newPerson = genealogyService.createIndividual(person);
+    const result = genealogyService.getIndividualById(newPerson.id);
     expect(result).toEqual({
       id: newPerson.id,
       fullName: makeFullName({

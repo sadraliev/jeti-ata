@@ -1,22 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { makeFullName, Person } from './lib';
+import { BaseIndividual, Individual, makeFullName } from './lib';
 
 @Injectable()
 export class GenealogyService {
-  private persons = new Map<string, Person>();
-  createPerson(person: Omit<Person, 'id' | 'fullName'>) {
+  private individuals = new Map<string, Individual>();
+
+  createIndividual(individual: BaseIndividual) {
     const identifier = new Date().getTime().toString();
-    this.persons.set(identifier, {
+    this.individuals.set(identifier, {
       id: identifier,
       fullName: makeFullName({
-        firstName: person.firstName,
-        lastName: person.lastName,
+        firstName: individual.firstName,
+        lastName: individual.lastName,
       }),
-      ...person,
+      ...individual,
     });
-    return this.getPersonById(identifier);
+    return this.getIndividualById(identifier);
   }
-  getPersonById(identifier: string) {
-    return this.persons.get(identifier);
+  getIndividualById(identifier: string) {
+    return this.individuals.get(identifier);
   }
 }
