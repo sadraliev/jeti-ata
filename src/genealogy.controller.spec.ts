@@ -17,10 +17,4 @@ describe('AppController', () => {
   it('should be defined', () => {
     expect(genealogyController).toBeDefined();
   });
-
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(genealogyController.getHello()).toBe('Hello World!');
-    });
-  });
 });

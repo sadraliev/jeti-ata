@@ -7,6 +7,6 @@ export class GenealogyController {
 
   @Get()
   getHello(): string {
-    return this.genealogyService.getHello();
+    return;
   }
 }
